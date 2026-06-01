@@ -22,7 +22,7 @@
     />
     <link
       rel="stylesheet"
-      href="style.css?v=19"
+      href="style.css?v=26"
     />
   </head>
   <body>
@@ -99,6 +99,10 @@
         <p class="hero-sub">Eksplorasi Digital Aksara Jawa</p>
         <h1 class="hero-title">ꦲꦤꦕꦫꦏ</h1>
         <p class="hero-desc">Pelajari, transliterasi, dan uji pemahamanmu tentang<br />Aksara Jawa Yogyakarta secara interaktif.</p>
+        <div class="hero-cta-wrap">
+          <button class="hero-cta-btn btn-cta-primary" data-target="playground">Mulai Belajar Aksara</button>
+          <button class="hero-cta-btn btn-cta-secondary" data-target="tracing">Coba Papan Tulis</button>
+        </div>
       </div>
       <div
         class="hero-ornament"
@@ -131,6 +135,9 @@
         >
           <!-- Cards injected by JS -->
         </div>
+        <div class="see-all-container">
+          <button class="btn-primary" id="seeAllCardsBtn">Lihat Semua Aksara (Sandhangan & Angka)</button>
+        </div>
       </section>
 
       <!-- SECTION 2: PLANG JOGJA GENERATOR -->
@@ -139,7 +146,7 @@
         class="section"
       >
         <div class="section-header">
-          <h2>🛣️ <span>Plang Jogja Generator</span></h2>
+          <h2><span>Plang Jogja Generator</span></h2>
           <p>Ketik teks Latin di bawah ini — konversi ke Aksara Jawa secara real-time.</p>
         </div>
         <div class="generator-wrap">
@@ -204,24 +211,26 @@
         class="section"
       >
         <div class="section-header">
-          <h2>✍️ <span>Papan Tulis Tracing</span></h2>
+          <h2><span>Papan Tulis Tracing</span></h2>
           <p>Pilih aksara di bawah dan ikuti pola transparan di papan tulis untuk belajar menulis.</p>
         </div>
         <div class="tracing-wrap">
-          <div class="tracing-letters-select" id="tracingLettersSelect">
-            <!-- Letters injected by JS -->
-          </div>
-          <div class="canvas-outer">
-            <div class="canvas-container">
-              <canvas id="paintCanvas" width="360" height="280"></canvas>
+          <div class="tracing-content-row">
+            <div class="tracing-letters-select" id="tracingLettersSelect">
+              <!-- Letters injected by JS -->
             </div>
-            <div class="canvas-actions">
-              <button class="btn-secondary" id="clearCanvasBtn">🧹 <span class="btn-text">Bersihkan</span></button>
-              <button class="btn-primary" id="checkCanvasBtn">✨ <span class="btn-text">Periksa Coretan</span></button>
-              <button class="btn-secondary" id="downloadCanvasBtn">💾 <span class="btn-text">Simpan Tulisan</span></button>
+            <div class="canvas-outer">
+              <div class="canvas-container">
+                <canvas id="paintCanvas" width="360" height="280"></canvas>
+              </div>
             </div>
-            <div id="traceFeedback" style="margin-top: 1rem; font-weight: 600; font-size: 0.95rem; text-align: center; min-height: 24px; color: var(--gold); transition: var(--trans);"></div>
           </div>
+          <div class="canvas-actions">
+            <button class="btn-secondary" id="clearCanvasBtn">🧹 <span class="btn-text">Bersihkan</span></button>
+            <button class="btn-primary" id="checkCanvasBtn">✨ <span class="btn-text">Periksa Coretan</span></button>
+            <button class="btn-secondary" id="downloadCanvasBtn">💾 <span class="btn-text">Simpan Tulisan</span></button>
+          </div>
+          <div id="traceFeedback" style="margin-top: 0.5rem; font-weight: 600; font-size: 0.95rem; text-align: center; min-height: 24px; color: var(--gold); transition: var(--trans);"></div>
         </div>
       </section>
 
@@ -231,7 +240,7 @@
         class="section"
       >
         <div class="section-header">
-          <h2>📜 <span>Legenda Aji Saka</span></h2>
+          <h2><span>Legenda Aji Saka</span></h2>
           <p>Asal-usul terciptanya 20 bait Aksara Hanacaraka Yogyakarta.</p>
         </div>
         <div class="story-container">
@@ -292,7 +301,7 @@
         class="section"
       >
         <div class="section-header">
-          <h2>📜 <span>Kuis Sastra & Sertifikat</span></h2>
+          <h2><span>Kuis Sastra & Sertifikat</span></h2>
           <p>Uji pemahamanmu dan raih Sertifikat Kompetensi Aksara Jawa.</p>
         </div>
         <div
@@ -308,6 +317,6 @@
       <p>AksaraHub — Edisi Yogyakarta</p>
     </footer>
 
-    <script src="script.js?v=19"></script>
+    <script src="script.js?v=26"></script>
   </body>
 </html>
