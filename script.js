@@ -260,14 +260,9 @@ if (hamburgerMenu && navLinks) {
 }
 
 document.querySelectorAll('.nav-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
     playSound('click');
-    document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.section').forEach((s) => s.classList.remove('active'));
-    
-    const targetSection = document.getElementById(btn.dataset.target);
-    targetSection.classList.add('active');
     
     // Close hamburger on mobile
     if (hamburgerMenu && navLinks) {
@@ -275,11 +270,66 @@ document.querySelectorAll('.nav-btn').forEach((btn) => {
       navLinks.classList.remove('active');
     }
     
-    // Init tracing canvas if selected
-    if (btn.dataset.target === 'tracing') {
-      setTimeout(initTracing, 50); // slight delay to allow layout calculation
+    const targetSection = document.getElementById(btn.dataset.target);
+    if (targetSection) {
+      const navHeight = 68; // Height of sticky navbar
+      const targetOffset = targetSection.offsetTop - navHeight + 10;
+      window.scrollTo({
+        top: targetOffset,
+        behavior: 'smooth'
+      });
+      
+      // Update active nav styling
+      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
     }
   });
+});
+
+// Smooth scroll for CTA buttons
+document.querySelectorAll('.hero-cta-btn').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    playSound('click');
+    const targetSection = document.getElementById(btn.dataset.target);
+    if (targetSection) {
+      const navHeight = 68;
+      const targetOffset = targetSection.offsetTop - navHeight + 10;
+      window.scrollTo({
+        top: targetOffset,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+// ScrollSpy: dynamic navbar highlighting on scroll
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('.section');
+  const navButtons = document.querySelectorAll('.nav-btn');
+  const navHeight = 68;
+  let currentActive = '';
+  
+  const scrollPos = (window.scrollY || document.documentElement.scrollTop) + navHeight + 20;
+  
+  sections.forEach((sec) => {
+    const secTop = sec.offsetTop;
+    const secHeight = sec.offsetHeight;
+    if (scrollPos >= secTop && scrollPos < secTop + secHeight) {
+      currentActive = sec.getAttribute('id');
+    }
+  });
+  
+  // Edge case: scroll to bottom
+  if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+    currentActive = 'kuis';
+  }
+  
+  if (currentActive) {
+    navButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.target === currentActive);
+    });
+  }
 });
 
 // ===== DARK / LIGHT MODE TOGGLE =====
@@ -350,28 +400,43 @@ function getFrontLabel(item) {
   }
 }
 
+let playgroundShowAll = false;
+
 function renderCards(filter = 'all') {
   const grid = document.getElementById('cardGrid');
   if (!grid) return;
   
   let combined = [...DATABASE_HANACARAKA, ...DATABASE_SANDHANGAN, ...DATABASE_ANGKA];
-  let filtered = filter === 'all' ? combined : combined.filter(item => item.category === filter);
+  let filtered;
+  
+  if (filter === 'all') {
+    if (playgroundShowAll) {
+      filtered = combined;
+    } else {
+      filtered = [...DATABASE_HANACARAKA];
+    }
+  } else {
+    filtered = combined.filter(item => item.category === filter);
+  }
   
   grid.innerHTML = filtered.map(
-    (item) => `
-    <div class="flip-card" role="button" aria-label="Aksara ${item.latin}">
-      <div class="flip-inner">
-        <div class="flip-front">
-          <span class="card-aksara">${item.aksara}</span>
-          <span class="card-id">${getFrontLabel(item)}</span>
+    (item) => {
+      const isNew = playgroundShowAll && item.category !== 'carakan' && filter === 'all';
+      return `
+        <div class="flip-card ${isNew ? 'fade-in-card' : ''}" role="button" aria-label="Aksara ${item.latin}">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="card-aksara">${item.aksara}</span>
+              <span class="card-id">${getFrontLabel(item)}</span>
+            </div>
+            <div class="flip-back">
+              <span class="back-latin">${item.latin}</span>
+              <span class="back-arti">${item.arti}</span>
+            </div>
+          </div>
         </div>
-        <div class="flip-back">
-          <span class="back-latin">${item.latin}</span>
-          <span class="back-arti">${item.arti}</span>
-        </div>
-      </div>
-    </div>
-  `,
+      `;
+    }
   ).join('');
 
   grid.querySelectorAll('.flip-card').forEach((card) => {
@@ -379,6 +444,31 @@ function renderCards(filter = 'all') {
       playSound('click');
       card.classList.toggle('is-flipped');
     });
+  });
+
+  const seeAllBtnWrap = document.querySelector('.see-all-container');
+  if (seeAllBtnWrap) {
+    if (playgroundShowAll || filter !== 'all') {
+      seeAllBtnWrap.style.display = 'none';
+    } else {
+      seeAllBtnWrap.style.display = 'flex';
+    }
+  }
+}
+
+// See All button event listener
+const seeAllCardsBtn = document.getElementById('seeAllCardsBtn');
+if (seeAllCardsBtn) {
+  seeAllCardsBtn.addEventListener('click', () => {
+    playSound('click');
+    playgroundShowAll = true;
+    
+    // Reset all filter buttons to inactive except 'Semua'
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.filter === 'all');
+    });
+    
+    renderCards('all');
   });
 }
 
@@ -999,4 +1089,5 @@ window.renderKuis = renderKuis;
 // ===== INIT =====
 renderCards();
 renderKuis();
+initTracing();
 
