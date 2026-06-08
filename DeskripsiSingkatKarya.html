@@ -32,7 +32,7 @@
         background: white;
         width: 210mm;
         height: 297mm;
-        padding: 20mm 20mm;
+        padding: 15mm 20mm;
         margin: 10mm auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         position: relative;
@@ -82,7 +82,7 @@
         text-align: center;
         border-bottom: 2px double var(--green);
         padding-bottom: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
       .header h3 {
         font-size: 10pt;
@@ -99,7 +99,7 @@
       /* Document Title */
       .doc-title {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 12px;
       }
       .doc-title h1 {
         font-size: 20pt;
@@ -118,7 +118,7 @@
       /* Metadata Table */
       .meta-table {
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 12px;
         border-collapse: collapse;
         font-size: 9.5pt;
       }
@@ -138,21 +138,21 @@
         color: var(--green);
         border-left: 4px solid var(--gold);
         padding-left: 8px;
-        margin-top: 15px;
-        margin-bottom: 8px;
+        margin-top: 10px;
+        margin-bottom: 6px;
         text-transform: uppercase;
         font-weight: 600;
       }
 
       p.paragraph {
         text-align: justify;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-size: 9.5pt;
       }
 
       ul.list {
         margin-left: 20px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-size: 9.5pt;
       }
 
@@ -257,10 +257,10 @@
 
       <h3 class="section-title">1. Pendahuluan & Latar Belakang</h3>
       <p class="paragraph">
-        Aksara Jawa (Hanacaraka) merupakan warisan budaya nasional bernilai tinggi yang diakui secara internasional. Namun, di era transformasi digital saat ini, minat generasi muda untuk mempelajari Aksara Jawa kian menyusut karena metode pembelajaran konvensional dinilai menjemukan.
+        Aksara Jawa (Hanacaraka) merupakan warisan budaya bernilai tinggi. Namun, di era transformasi digital saat ini, minat generasi muda untuk mempelajarinya menyusut karena metode konvensional dinilai menjemukan.
       </p>
       <p class="paragraph">
-        <strong>AksaraHub Yogyakarta</strong> hadir sebagai solusi inovatif berupa media pembelajaran berbasis web (Single Page Application) yang interaktif dan dinamis. Difokuskan khusus pada gaya penulisan daerah Yogyakarta, platform ini dirancang dengan estetika visual hijau keraton (keraton green) dan emas royal (royal gold) yang autentik untuk menghadirkan atmosfer lokal Kraton Ngayogyakarta Hadiningrat yang kental namun tetap dikemas secara modern.
+        <strong>AksaraHub Yogyakarta</strong> hadir sebagai media pembelajaran web interaktif dan dinamis bergaya khas Yogyakarta. Dengan estetika hijau keraton (<i>keraton green</i>) dan emas royal (<i>royal gold</i>), platform ini menghadirkan atmosfer lokal Kraton Ngayogyakarta Hadiningrat yang autentik namun tetap modern.
       </p>
 
       <h3 class="section-title">2. Pendekatan Desain & Keunggulan Teknis</h3>
@@ -268,10 +268,10 @@
         Untuk memenuhi standar kompetisi tingkat tinggi, proyek ini dibangun dengan memprioritaskan kualitas kode dan efisiensi performa:
       </p>
       <ul class="list">
-        <li><strong>Arsitektur Tanpa Dependency (Pure Vanilla)</strong>: 100% kode ditulis menggunakan HTML, CSS, dan JS murni tanpa bantuan library (seperti React, Bootstrap, Tailwind, atau jQuery) untuk membuktikan penguasaan fundamental web yang kokoh.</li>
-        <li><strong>Navigasi Hybrid & Virtual SPA Routing (Hash-Based)</strong>: Mengintegrasikan sistem navigasi hybrid berbasis URL Hash (<code>#</code>). Pengguna dapat menjelajahi web secara mengalir (<i>one-page scroll</i>), namun ketika mengklik menu navbar, sistem akan mengisolasi halaman aktif dan menyembunyikan section lainnya secara mutlak (<i>isolated mode</i>) untuk mensimulasikan multi-page website yang riil.</li>
-        <li><strong>Struktur Data Client-Side</strong>: Database 39 aksara (Carakan, Sandhangan, Angka) dikelola langsung di sisi klien menggunakan struktur data memori lokal yang sangat cepat dan bebas latensi server.</li>
-        <li><strong>Responsivitas Mobile-First</strong>: Layout dioptimalkan khusus untuk kenyamanan perangkat genggam (ponsel juri) menggunakan media query CSS yang fleksibel tanpa duplikasi kode.</li>
+        <li><strong>Arsitektur Tanpa Dependency</strong>: 100% kode ditulis dengan HTML, CSS, dan JS murni tanpa library (seperti React, Tailwind, atau jQuery) untuk membuktikan penguasaan fundamental web yang kokoh.</li>
+        <li><strong>Navigasi Hybrid & Virtual SPA</strong>: Menggunakan routing URL Hash (<code>#</code>) untuk memadukan kenyamanan scroll halaman dengan isolasi fitur (<i>isolated mode</i>), menghadirkan sensasi multi-page yang terstruktur.</li>
+        <li><strong>Struktur Data Client-Side</strong>: Database 39 aksara dikelola di sisi klien secara lokal, menghasilkan performa interaksi instan tanpa latensi server.</li>
+        <li><strong>Responsivitas Mobile-First</strong>: Layout dioptimalkan khusus untuk kenyamanan perangkat genggam menggunakan media query CSS yang efisien.</li>
       </ul>
 
       <h3 class="section-title">3. Inovasi & Nilai Tambah</h3>
