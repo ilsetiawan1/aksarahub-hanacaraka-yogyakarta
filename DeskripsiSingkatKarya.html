@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Deskripsi Singkat Karya - AksaraHub Yogyakarta</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      
+      :root {
+        --green: #0f4c2a;
+        --gold: #d4af37;
+        --cream: #fbf9f2;
+        --text: #2b2b2b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: var(--text);
+        background-color: #f0f0f0;
+        line-height: 1.5;
+        font-size: 11pt;
+      }
+
+      /* Page Setup for A4 Printing */
+      .page {
+        background: white;
+        width: 210mm;
+        height: 297mm;
+        padding: 20mm 20mm;
+        margin: 10mm auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Print Specific Styling */
+      @media print {
+        body {
+          background: none;
+        }
+        .page {
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+        }
+        @page {
+          size: A4;
+          margin: 0;
+        }
+      }
+
+      /* Decorative Borders */
+      .page::before {
+        content: "";
+        position: absolute;
+        top: 8mm;
+        left: 8mm;
+        right: 8mm;
+        bottom: 8mm;
+        border: 1px solid rgba(15, 76, 42, 0.15);
+        pointer-events: none;
+      }
+      .page::after {
+        content: "";
+        position: absolute;
+        top: 10mm;
+        left: 10mm;
+        right: 10mm;
+        bottom: 10mm;
+        border: 2px solid var(--gold);
+        pointer-events: none;
+      }
+
+      /* Header Style */
+      .header {
+        text-align: center;
+        border-bottom: 2px double var(--green);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+      .header h3 {
+        font-size: 10pt;
+        text-transform: uppercase;
+        color: var(--green);
+        letter-spacing: 1.5px;
+        font-weight: 600;
+      }
+      .header p {
+        font-size: 8pt;
+        color: #666;
+      }
+
+      /* Document Title */
+      .doc-title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .doc-title h1 {
+        font-size: 20pt;
+        color: var(--green);
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .doc-title h2 {
+        font-size: 10pt;
+        color: var(--gold);
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* Metadata Table */
+      .meta-table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+        font-size: 9.5pt;
+      }
+      .meta-table td {
+        padding: 5px 8px;
+        border-bottom: 1px solid #eee;
+      }
+      .meta-table td.label {
+        font-weight: 600;
+        color: var(--green);
+        width: 25%;
+      }
+
+      /* Content Headings */
+      h3.section-title {
+        font-size: 12pt;
+        color: var(--green);
+        border-left: 4px solid var(--gold);
+        padding-left: 8px;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      p.paragraph {
+        text-align: justify;
+        margin-bottom: 8px;
+        font-size: 9.5pt;
+      }
+
+      ul.list {
+        margin-left: 20px;
+        margin-bottom: 8px;
+        font-size: 9.5pt;
+      }
+
+      ul.list li {
+        margin-bottom: 3px;
+      }
+
+      /* Features Grid Layout */
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 5px;
+      }
+      .feature-item {
+        background: #fafafa;
+        border: 1px solid #e5e5e5;
+        border-radius: 6px;
+        padding: 10px;
+      }
+      .feature-item h4 {
+        font-size: 9.5pt;
+        color: var(--green);
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+      .feature-item p {
+        font-size: 8.5pt;
+        color: #555;
+        text-align: justify;
+      }
+
+      /* Footer Note */
+      .page-footer {
+        position: absolute;
+        bottom: 15mm;
+        left: 20mm;
+        right: 20mm;
+        display: flex;
+        justify-content: space-between;
+        font-size: 8pt;
+        color: #777;
+        border-top: 1px solid #ddd;
+        padding-top: 8px;
+      }
+
+      /* Highlight Box */
+      .juri-box {
+        background: #fbf9f2;
+        border: 1.5px dashed var(--gold);
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 15px;
+      }
+      .juri-box h4 {
+        color: var(--green);
+        font-size: 10pt;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+      .juri-box p {
+        font-size: 8.5pt;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE 1 -->
+    <div class="page">
+      <div class="header">
+        <h3>Web Design Competition - Dies Natalis ke-15 UNISKA MAB</h3>
+        <p>Himpunan Mahasiswa Program Studi Teknik Informatika (HMP-TI)</p>
+      </div>
+
+      <div class="doc-title">
+        <h1>AksaraHub Yogyakarta</h1>
+        <h2>Deskripsi Singkat Karya & Inovasi Teknologi</h2>
+      </div>
+
+      <table class="meta-table">
+        <tr>
+          <td class="label">Nama Karya</td>
+          <td>AksaraHub - Hanacaraka Yogyakarta</td>
+          <td class="label">Kategori</td>
+          <td>Web Design Competition (Umum/Mahasiswa)</td>
+        </tr>
+        <tr>
+          <td class="label">Teknologi</td>
+          <td>HTML5, CSS3 Vanilla, JavaScript Vanilla (Zero-Dependency)</td>
+          <td class="label">Pengembang</td>
+          <td>Muhammad Ilham Setiawan</td>
+        </tr>
+        <tr>
+          <td class="label">Repositori Git</td>
+          <td colspan="3"><a href="https://github.com/ilsetiawan1/aksarahub-hanacaraka-yogyakarta" style="color: var(--green); text-decoration: none; font-weight: 500;">https://github.com/ilsetiawan1/aksarahub-hanacaraka-yogyakarta.git</a></td>
+        </tr>
+        <tr>
+          <td class="label">Link Karya (Live)</td>
+          <td colspan="3"><a href="https://aksarahub-hanacaraka-yogyakarta.vercel.app/" style="color: var(--green); text-decoration: none; font-weight: 500;">https://aksarahub-hanacaraka-yogyakarta.vercel.app/</a></td>
+        </tr>
+      </table>
+
+      <h3 class="section-title">1. Pendahuluan & Latar Belakang</h3>
+      <p class="paragraph">
+        Aksara Jawa (Hanacaraka) merupakan warisan budaya nasional bernilai tinggi yang diakui secara internasional. Namun, di era transformasi digital saat ini, minat generasi muda untuk mempelajari Aksara Jawa kian menyusut karena metode pembelajaran konvensional dinilai menjemukan.
+      </p>
+      <p class="paragraph">
+        <strong>AksaraHub Yogyakarta</strong> hadir sebagai solusi inovatif berupa media pembelajaran berbasis web (Single Page Application) yang interaktif dan dinamis. Difokuskan khusus pada gaya penulisan daerah Yogyakarta, platform ini dirancang dengan estetika visual hijau keraton (keraton green) dan emas royal (royal gold) yang autentik untuk menghadirkan atmosfer lokal Kraton Ngayogyakarta Hadiningrat yang kental namun tetap dikemas secara modern.
+      </p>
+
+      <h3 class="section-title">2. Pendekatan Desain & Keunggulan Teknis</h3>
+      <p class="paragraph">
+        Untuk memenuhi standar kompetisi tingkat tinggi, proyek ini dibangun dengan memprioritaskan kualitas kode dan efisiensi performa:
+      </p>
+      <ul class="list">
+        <li><strong>Arsitektur Tanpa Dependency (Pure Vanilla)</strong>: 100% kode ditulis menggunakan HTML, CSS, dan JS murni tanpa bantuan library (seperti React, Bootstrap, Tailwind, atau jQuery) untuk membuktikan penguasaan fundamental web yang kokoh.</li>
+        <li><strong>Navigasi Hybrid & Virtual SPA Routing (Hash-Based)</strong>: Mengintegrasikan sistem navigasi hybrid berbasis URL Hash (<code>#</code>). Pengguna dapat menjelajahi web secara mengalir (<i>one-page scroll</i>), namun ketika mengklik menu navbar, sistem akan mengisolasi halaman aktif dan menyembunyikan section lainnya secara mutlak (<i>isolated mode</i>) untuk mensimulasikan multi-page website yang riil.</li>
+        <li><strong>Struktur Data Client-Side</strong>: Database 39 aksara (Carakan, Sandhangan, Angka) dikelola langsung di sisi klien menggunakan struktur data memori lokal yang sangat cepat dan bebas latensi server.</li>
+        <li><strong>Responsivitas Mobile-First</strong>: Layout dioptimalkan khusus untuk kenyamanan perangkat genggam (ponsel juri) menggunakan media query CSS yang fleksibel tanpa duplikasi kode.</li>
+      </ul>
+
+      <h3 class="section-title">3. Inovasi & Nilai Tambah</h3>
+      <p class="paragraph">
+        Inovasi utama terletak pada integrasi Plang Jalan Yogyakarta Generator dan Gamifikasi Tracing Aksara. Aplikasi tidak hanya mengajari teori, melainkan memberikan simulasi nyata pembuatan papan jalan ikonik Jogja yang bisa diunduh, serta modul melatih otot motorik menulis aksara Jawa secara presisi dengan penilaian akurasi goresan secara real-time.
+      </p>
+
+      <div class="page-footer">
+        <span>AksaraHub Yogyakarta — Dokumentasi Karya</span>
+        <span>Halaman 1 dari 2</span>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div class="header">
+        <h3>Web Design Competition - Dies Natalis ke-15 UNISKA MAB</h3>
+        <p>Himpunan Mahasiswa Program Studi Teknik Informatika (HMP-TI)</p>
+      </div>
+
+      <h3 class="section-title">4. Penjelasan Detail Fitur Aplikasi</h3>
+      
+      <div class="features-grid">
+        <div class="feature-item">
+          <h4>A. Hanacaraka Playground</h4>
+          <p>Kumpulan 39 kartu interaktif (Carakan, Sandhangan, Angka Jawa) dengan efek flip 3D CSS. Ketika kartu diklik, sisi belakang kartu menyajikan cara pelafalan Latin serta arti filosofi aksara tersebut disertai feedback efek suara.</p>
+        </div>
+        <div class="feature-item">
+          <h4>B. Plang Jogja (Transliterasi)</h4>
+          <p>Mengubah teks Latin biasa menjadi Aksara Jawa secara real-time dan memvisualisasikannya ke dalam desain plang jalan hijau Yogyakarta. Dilengkapi kustomisasi tema Siang/Malam (efek neon menyala) dan fitur salin aksara otomatis.</p>
+        </div>
+        <div class="feature-item">
+          <h4>C. Papan Tulis (Gamifikasi Tracing)</h4>
+          <p>Kanvas gambar interaktif bagi pengguna untuk belajar menggoreskan aksara sesuai garis pemandu. Dilengkapi algoritma penilaian pixel yang mendeteksi ketepatan tulisan pengguna serta menyimpan coretan ke file PNG.</p>
+        </div>
+        <div class="feature-item">
+          <h4>D. Legenda Aji Saka (Komik Geser)</h4>
+          <p>Media cerita bergambar interaktif (Story Slider) yang menceritakan asal-usul filosofi terciptanya 20 bait Aksara Hanacaraka Yogyakarta, memperkuat keterikatan budaya dalam proses belajar.</p>
+        </div>
+        <div class="feature-item" style="grid-column: span 2;">
+          <h4>E. Kuis Sastra & Sertifikasi</h4>
+          <p>Kuis evaluasi acak sebanyak 10 soal dari 39 database aksara. Memiliki fitur "kisi-kisi" jika salah menjawab. Bila pengguna mencapai kelulusan (skor >= 80%), sistem menggambar sertifikat resmi di Canvas yang siap diunduh.</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">5. Komitmen Pelestarian Budaya Jawa</h3>
+      <p class="paragraph">
+        AksaraHub Yogyakarta dirancang bukan sekadar sebagai pemenuhan tugas kompetisi, melainkan proyek berkelanjutan untuk memajukan pendidikan budaya daerah. Dengan menghadirkan pengalaman visual yang mewah, audio yang hidup, serta gamifikasi menulis, aplikasi ini bertekad mengubah cara pandang generasi milenial terhadap pelajaran bahasa daerah agar menjadi lebih modern, keren, dan prestisius.
+      </p>
+
+      <div class="juri-box">
+        <h4>💡 Khusus Dewan Juri: Fitur Pintasan Evaluasi (Cheat Mode)</h4>
+        <p>
+          Saya sangat menghargai waktu Dewan Juri. Untuk memudahkan penilaian fungsionalitas pembuatan Sertifikat Kelulusan berbasis Canvas tanpa juri harus menebak 10 pertanyaan aksara terlebih dahulu, saya telah membuat tombol pintasan bypass:
+        </p>
+        <p style="margin-top: 5px; font-weight: 500; color: var(--green);">
+          Langkah: Buka Menu "Kuis Sastra" &rarr; Masukkan Nama Anda &rarr; Klik tombol emas "👁️ Pratinjau Sertifikat (Khusus Juri)". 
+        </p>
+        <p style="margin-top: 3px;">
+          Sistem akan langsung menampilkan lembar sertifikat kelulusan 100% yang siap diunduh secara instan!
+        </p>
+      </div>
+
+      <div class="page-footer">
+        <span>AksaraHub Yogyakarta — Dokumentasi Karya</span>
+        <span>Halaman 2 dari 2</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -84,6 +84,8 @@ body {
   font-size: 1.8rem;
   color: var(--gold);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  transform: translateY(4px);
 }
 .brand-text {
   font-size: 1.25rem;
@@ -276,6 +278,22 @@ body.dark-theme .section {
 }
 .section:last-of-type {
   border-bottom: none;
+}
+
+/* ===== VIRTUAL SPA: ISOLATED MODE ===== */
+body.isolated-mode .hero {
+  display: none !important;
+}
+body.isolated-mode .section {
+  display: none !important;
+}
+body.isolated-mode .section.active {
+  display: flex !important;
+  min-height: calc(100vh - var(--nav-h));
+  border-bottom: none;
+}
+body.isolated-mode .section::after {
+  display: none;
 }
 .section::after {
   content: '꧁ ꧋ ꧂';

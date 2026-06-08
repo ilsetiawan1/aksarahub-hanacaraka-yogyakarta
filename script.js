@@ -259,52 +259,50 @@ if (hamburgerMenu && navLinks) {
   });
 }
 
-document.querySelectorAll('.nav-btn').forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    playSound('click');
-    
-    // Close hamburger on mobile
-    if (hamburgerMenu && navLinks) {
-      hamburgerMenu.classList.remove('active');
-      navLinks.classList.remove('active');
-    }
-    
-    const targetSection = document.getElementById(btn.dataset.target);
-    if (targetSection) {
-      const navHeight = 68; // Height of sticky navbar
-      const targetOffset = targetSection.offsetTop - navHeight + 10;
-      window.scrollTo({
-        top: targetOffset,
-        behavior: 'smooth'
-      });
-      
-      // Update active nav styling
-      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-    }
-  });
-});
+// ===== VIRTUAL SPA ROUTING ENGINE =====
+const VALID_SECTIONS = ['playground', 'generator', 'tracing', 'legenda', 'kuis'];
 
-// Smooth scroll for CTA buttons
-document.querySelectorAll('.hero-cta-btn').forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    playSound('click');
-    const targetSection = document.getElementById(btn.dataset.target);
-    if (targetSection) {
-      const navHeight = 68;
-      const targetOffset = targetSection.offsetTop - navHeight + 10;
-      window.scrollTo({
-        top: targetOffset,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
+function handleRouting() {
+  const hash = window.location.hash.substring(1); // Ambil hash (tanpa karakter '#')
+  
+  if (VALID_SECTIONS.includes(hash)) {
+    // 1. Aktifkan Mode Halaman Terisolasi
+    document.body.classList.add('isolated-mode');
+    
+    // 2. Sembunyikan semua section kecuali yang dipilih
+    document.querySelectorAll('.section').forEach((sec) => {
+      if (sec.id === hash) {
+        sec.classList.add('active');
+      } else {
+        sec.classList.remove('active');
+      }
+    });
+    
+    // 3. Update styling tombol navbar aktif
+    document.querySelectorAll('.nav-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.target === hash);
+    });
+    
+    // 4. Scroll ke posisi teratas halaman secara instan (efek pindah page)
+    window.scrollTo(0, 0);
+  } else {
+    // 1. Matikan Mode Halaman Terisolasi (Kembali ke Scroll Mode)
+    document.body.classList.remove('isolated-mode');
+    
+    // 2. Pastikan semua section memiliki class active agar terlihat di mode scroll
+    document.querySelectorAll('.section').forEach((sec) => {
+      sec.classList.add('active');
+    });
+    
+    // 3. Jalankan fungsi ScrollSpy untuk mengupdate tombol aktif
+    updateScrollSpy();
+  }
+}
 
-// ScrollSpy: dynamic navbar highlighting on scroll
-window.addEventListener('scroll', () => {
+function updateScrollSpy() {
+  // Jangan jalankan scrollspy jika sedang berada di mode halaman terisolasi
+  if (document.body.classList.contains('isolated-mode')) return;
+  
   const sections = document.querySelectorAll('.section');
   const navButtons = document.querySelectorAll('.nav-btn');
   const navHeight = 68;
@@ -320,7 +318,7 @@ window.addEventListener('scroll', () => {
     }
   });
   
-  // Edge case: scroll to bottom
+  // Kasus khusus scroll ke paling bawah
   if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
     currentActive = 'kuis';
   }
@@ -329,15 +327,84 @@ window.addEventListener('scroll', () => {
     navButtons.forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.target === currentActive);
     });
+  } else {
+    // Default aktifkan tombol pertama jika berada di paling atas (Hero Section)
+    navButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.target === 'playground');
+    });
+  }
+}
+
+// Event Listeners untuk Navigasi & Routing
+window.addEventListener('scroll', updateScrollSpy);
+window.addEventListener('hashchange', handleRouting);
+window.addEventListener('DOMContentLoaded', () => {
+  handleRouting();
+  
+  // Daftarkan listener pada logo untuk me-reset ke scroll mode
+  const brand = document.querySelector('.nav-brand');
+  if (brand) {
+    brand.addEventListener('click', (e) => {
+      e.preventDefault();
+      playSound('click');
+      window.location.hash = ''; // Bersihkan hash
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
   }
 });
 
-// ===== DARK / LIGHT MODE TOGGLE =====
+// Event click tombol navbar
+document.querySelectorAll('.nav-btn').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    playSound('click');
+    
+    // Tutup hamburger di mobile
+    if (hamburgerMenu && navLinks) {
+      hamburgerMenu.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+    
+    const targetHash = '#' + btn.dataset.target;
+    if (window.location.hash === targetHash) {
+      // Jika sudah di halaman tersebut, scroll ke atas
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.location.hash = btn.dataset.target;
+    }
+  });
+});
+
+// Event click tombol CTA di Hero Section
+document.querySelectorAll('.hero-cta-btn').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    playSound('click');
+    window.location.hash = btn.dataset.target;
+  });
+});
+
+// ===== DARK / LIGHT MODE TOGGLE (WITH LOCALSTORAGE PERSISTENCE) =====
 const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click', () => {
+
+// Inisialisasi tema dari localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark-theme');
+  if (themeToggle) themeToggle.textContent = '🌙';
+} else {
+  document.body.classList.remove('dark-theme');
+  if (themeToggle) themeToggle.textContent = '☀️';
+}
+
+themeToggle?.addEventListener('click', () => {
   playSound('click');
   const isDark = document.body.classList.toggle('dark-theme');
   themeToggle.textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
 // ===== SECTION 1: PLAYGROUND & FILTERS =====
